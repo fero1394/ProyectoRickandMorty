@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div style="text-align:center">
+  <h1>
+    Bienvenido a {{ title }}!
+  </h1>
+  <p>Porfavor Busque su personaje favorito</p>
+  <p>Páginas: {{info.pages}}</p>
+  <p>Total: {{info.count}}</p>
+  <div class="container-pages">
+    <ul class="paginator">
+      <li *ngFor="let page of pages;let i = index" (click)="search($event, i)" [className]="'page ' + (i + 1 === currentPage? 'selected-page': '')">
+        {{i + 1}}
+      </li>
+    </ul>
+  </div>
+  <input type="search" [(ngModel)]="q" placeholder="Search..." (keyup)="search($event, 0)" >
+  <div class="main-container">
+    <div class="character-container" *ngFor="let character of characters">
+      <div id="card" class="card" style="width: 18rem;">
+        <div class="card-body">
+          <img class="card-img-top" [src]="character.image" [alt]="character.name">
+          <h5 class="card-title" ><p>{{character.name}}</p></h5>
+          <p class="card-text">Status: {{character.status}}</p>
+          <p>Species: {{character.species}}</p>
+          <button class="btn btn-primary" (click)="agregar(character.name,character.status,character.species,character.image)">Agregar a la lista</button>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
